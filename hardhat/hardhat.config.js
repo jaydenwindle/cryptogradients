@@ -13,9 +13,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+const ROPSTEN_PRIVATE_KEY =
+  "e16e795ded582932f19a60e3e82ecd58bb83251fdf7a8b60c678f78ce57e7a84";
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
   solidity: "0.8.4",
+  networks: {
+    ropsten: {
+      url: "https://ropsten.infura.io/v3/cdeb9df95808415ebe4e7c5a3e0606aa",
+      accounts: [`0x${ROPSTEN_PRIVATE_KEY}`],
+    },
+  },
 };
