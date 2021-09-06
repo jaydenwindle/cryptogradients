@@ -14,7 +14,7 @@ export default async (req, res) => {
     provider
   );
 
-  const gradient = await cg.getGradientForTokenId(1);
+  const gradient = await cg.getGradientForTokenId(tokenId);
 
   res.setHeader(
     "Cache-Control",
