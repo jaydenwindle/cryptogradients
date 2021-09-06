@@ -47,8 +47,7 @@ export default function Home() {
       }}
     >
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>CryptoGradients</title>
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
@@ -150,13 +149,25 @@ export default function Home() {
             )}
           </div>
           <div className="flex space-x-4 justify-center mt-8">
-            <a href="#" className="text-white underline">
+            <a
+              href="#"
+              className="text-white underline"
+              onClick={() => alert("coming soon")}
+            >
               combine
             </a>
-            <a href="#" className="text-white underline">
+            <a
+              href="#"
+              className="text-white underline"
+              onClick={() => alert("coming soon...")}
+            >
               faqs
             </a>
-            <a href="#" className="text-white underline">
+            <a
+              href="#"
+              className="text-white underline"
+              onClick={() => alert("coming soon...")}
+            >
               roadmap
             </a>
           </div>
