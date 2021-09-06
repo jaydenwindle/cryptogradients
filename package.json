@@ -6,12 +6,30 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.1",
+    "@heroicons/react": "^1.0.4",
+    "@tailwindcss/forms": "^0.3.3",
+    "chrome-aws-lambda": "^10.1.0",
     "next": "latest",
+    "playwright-core": "^1.14.1",
+    "randomcolor": "^0.6.2",
+    "rc-color-picker": "^1.2.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-color-palette": "^6.1.0",
+    "react-colorful": "^5.4.0",
+    "react-dom": "^17.0.2",
+    "react-linear-gradient-picker": "^2.0.0",
+    "web3modal": "^1.9.4"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",
+    "@openzeppelin/contracts": "^4.3.1",
     "autoprefixer": "^10.2.6",
+    "chai": "^4.2.0",
+    "ethereum-waffle": "^3.0.0",
+    "ethers": "^5.0.0",
+    "hardhat": "^2.6.2",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"
   }
