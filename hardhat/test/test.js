@@ -104,11 +104,18 @@ describe("CryptoGradients", function () {
     console.log(tokenUri);
 
     const encodedPayload = tokenUri.split(",").pop();
-    const buff = new Buffer.from(encodedPayload, "base64");
-    const payload = buff.toString();
+    const payloadString = new Buffer.from(encodedPayload, "base64").toString();
+    console.log(payloadString);
+    const payload = JSON.parse(payloadString);
 
-    expect(payload).to.equal(
-      "{\"name\":\"CryptoGradient #0\", \"description\": \"10k on-chain gradients\", \"image\": \"data:image/svg+xml,%3Csvg width='1024' height='1024' viewBox='0 0 1024 1024' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1024' height='1024' fill='white'/%3E%3Crect width='1024' height='1024' fill='url(%23paint0_linear)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear' x1='0' y1='0' x2='1024' y2='1024' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239DE0FB'/%3E%3Cstop offset='1' stop-color='%233FC1F8'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E\"}"
+    expect(payload).property("name").to.equal("CryptoGradient #0");
+    expect(payload).property("description").to.equal("10k on-chain gradients");
+    expect(payload).property("image").to.contain("data:image/svg+xml;base64,");
+
+    const encodedSvg = payload.image.split(",").pop();
+    const svg = new Buffer.from(encodedSvg, "base64").toString();
+    expect(svg).to.equal(
+      "<svg width='1024' height='1024' viewBox='0 0 1024 1024' fill='none' xmlns='http://www.w3.org/2000/svg'><rect width='1024' height='1024' fill='white'/><rect width='1024' height='1024' fill='url(#paint0_linear)'/><defs><linearGradient id='paint0_linear' x1='0' y1='0' x2='1024' y2='1024' gradientUnits='userSpaceOnUse'><stop stop-color='#9DE0FB'/><stop offset='1' stop-color='#3FC1F8'/></linearGradient></defs></svg>"
     );
   });
 });

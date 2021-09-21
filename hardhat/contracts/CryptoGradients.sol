@@ -145,14 +145,21 @@ contract CryptoGradients is
     {
         require(_exists(tokenId), "ERC721URIStorage: URI query for nonexistent token");
 
+        string memory svg = Base64.encode(abi.encodePacked(
+            "",
+            '<svg width=\'1024\' height=\'1024\' viewBox=\'0 0 1024 1024\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'1024\' height=\'1024\' fill=\'white\'/><rect width=\'1024\' height=\'1024\' fill=\'url(#paint0_linear)\'/><defs><linearGradient id=\'paint0_linear\' x1=\'0\' y1=\'0\' x2=\'1024\' y2=\'1024\' gradientUnits=\'userSpaceOnUse\'><stop stop-color=\'#',
+            getColor1(tokenId),
+            '\'/><stop offset=\'1\' stop-color=\'#',
+            getColor2(tokenId),
+            '\'/></linearGradient></defs></svg>'
+        ));
+
         string memory payload = string(abi.encodePacked(
             '{"name":"CryptoGradient #',
             uint2str(tokenId),
-            '", "description": "10k on-chain gradients", "image": "data:image/svg+xml,%3Csvg width=\'1024\' height=\'1024\' viewBox=\'0 0 1024 1024\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'1024\' height=\'1024\' fill=\'white\'/%3E%3Crect width=\'1024\' height=\'1024\' fill=\'url(%23paint0_linear)\'/%3E%3Cdefs%3E%3ClinearGradient id=\'paint0_linear\' x1=\'0\' y1=\'0\' x2=\'1024\' y2=\'1024\' gradientUnits=\'userSpaceOnUse\'%3E%3Cstop stop-color=\'%23',
-            getColor1(tokenId),
-            '\'/%3E%3Cstop offset=\'1\' stop-color=\'%23',
-            getColor2(tokenId),
-            '\'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E"}'
+            '", "description": "10k on-chain gradients", "image": "',
+            string(abi.encodePacked("data:image/svg+xml;base64,", svg)),
+            '"}'
         ));
 
         return string(abi.encodePacked(
