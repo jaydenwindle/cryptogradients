@@ -108,7 +108,7 @@ describe("CryptoGradients", function () {
     const payload = buff.toString();
 
     expect(payload).to.equal(
-      '{"name":"CryptoGradient #0", "description": "10k on-chain gradients", "image": "data:image/svg+xml,%3Csvg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="1024" height="1024" fill="white"/%3E%3Crect width="1024" height="1024" fill="url(%23paint0_linear)"/%3E%3Cdefs%3E%3ClinearGradient id="paint0_linear" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse"%3E%3Cstop stop-color="%239DE0FB"/%3E%3Cstop offset="1" stop-color="%233FC1F8"/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E"}'
+      "{\"name\":\"CryptoGradient #0\", \"description\": \"10k on-chain gradients\", \"image\": \"data:image/svg+xml,%3Csvg width='1024' height='1024' viewBox='0 0 1024 1024' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1024' height='1024' fill='white'/%3E%3Crect width='1024' height='1024' fill='url(%23paint0_linear)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear' x1='0' y1='0' x2='1024' y2='1024' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%239DE0FB'/%3E%3Cstop offset='1' stop-color='%233FC1F8'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E\"}"
     );
   });
 });
