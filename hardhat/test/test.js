@@ -101,15 +101,17 @@ describe("CryptoGradients", function () {
 
     expect(await cg.ownerOf(0)).to.equal(user1.address);
     const tokenUri = await cg.tokenURI(0);
-    console.log(tokenUri);
 
     const encodedPayload = tokenUri.split(",").pop();
     const payloadString = new Buffer.from(encodedPayload, "base64").toString();
-    console.log(payloadString);
     const payload = JSON.parse(payloadString);
 
-    expect(payload).property("name").to.equal("CryptoGradient #0");
-    expect(payload).property("description").to.equal("10k on-chain gradients");
+    expect(payload).property("name").to.equal("Gradient #0");
+    expect(payload)
+      .property("description")
+      .to.equal(
+        "CryptoGradients are 10k unique gradients stored on-chain. Learn more at https://testnet-cryptogradients.vercel.app/"
+      );
     expect(payload).property("image").to.contain("data:image/svg+xml;base64,");
 
     const encodedSvg = payload.image.split(",").pop();

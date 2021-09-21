@@ -155,9 +155,9 @@ contract CryptoGradients is
         ));
 
         string memory payload = string(abi.encodePacked(
-            '{"name":"CryptoGradient #',
+            '{"name":"Gradient #',
             uint2str(tokenId),
-            '", "description": "10k on-chain gradients", "image": "',
+            '", "description": "CryptoGradients are 10k unique gradients stored on-chain. Learn more at https://testnet-cryptogradients.vercel.app/", "image": "',
             string(abi.encodePacked("data:image/svg+xml;base64,", svg)),
             '"}'
         ));
