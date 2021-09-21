@@ -30,13 +30,7 @@ contract CryptoGradients is
 
     string private baseURI;
 
-    constructor(string memory baseURI_) ERC721("CryptoGradients", "CG") {
-        baseURI = baseURI_;
-    }
-
-    function _baseURI() internal view override returns (string memory) {
-        return baseURI;
-    }
+    constructor() ERC721("CryptoGradients", "CG") {}
 
     // color must be 6 digit uppercase hex color without # prefix
     function isValidColor(string memory color) public pure returns (bool) {
@@ -90,6 +84,11 @@ contract CryptoGradients is
         view
         returns (Token memory)
     {
+        require(
+            gradientHashToToken[_hash].minted,
+            "This gradient does not exist"
+        );
+
         return gradientHashToToken[_hash];
     }
 
@@ -137,6 +136,49 @@ contract CryptoGradients is
         _tokenIdCounter.increment();
     }
 
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        require(_exists(tokenId), "ERC721URIStorage: URI query for nonexistent token");
+
+        return string(abi.encodePacked(
+            "data:text/plain;charset=utf-8,%7B%22title%22%3A%20%22CryptoGradient%20%23",
+            uint2str(tokenId),
+            "%22%2C%20%22description%22%3A%20%2210k%20unique%20on-chain%20gradients%22%2C%20%22image%22%3A%20%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%20width%3D%271024%27%20height%3D%271024%27%20viewBox%3D%270%200%201024%201024%27%20fill%3D%27none%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%253E%253Crect%20width%3D%271024%27%20height%3D%271024%27%20fill%3D%27white%27%2F%253E%253Crect%20width%3D%271024%27%20height%3D%271024%27%20fill%3D%27url%28%2523paint0_linear%29%27%2F%253E%253Cdefs%253E%253ClinearGradient%20id%3D%27paint0_linear%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271017.54%27%20y2%3D%271017.57%27%20gradientUnits%3D%27userSpaceOnUse%27%253E%253Cstop%20stop-color%3D%27%2523",
+            getColor1(tokenId),
+            "%27%2F%253E%253Cstop%20offset%3D%271%27%20stop-color%3D%27%2523",
+            getColor2(tokenId),
+            "%27%2F%253E%253C%2FlinearGradient%253E%253C%2Fdefs%253E%253C%2Fsvg%253E%250A%22%7D"
+        ));
+    }
+
+    function getColor1(uint256 tokenId) public view returns (string memory) {
+        bytes memory gradient = bytes(tokenIdToGradient[tokenId]);
+        return string(abi.encodePacked(
+            gradient[0],
+            gradient[1],
+            gradient[2],
+            gradient[3],
+            gradient[4],
+            gradient[5]
+        ));
+    }
+
+    function getColor2(uint256 tokenId) public view returns (string memory) {
+        bytes memory gradient = bytes(tokenIdToGradient[tokenId]);
+        return string(abi.encodePacked(
+            gradient[6],
+            gradient[7],
+            gradient[8],
+            gradient[9],
+            gradient[10],
+            gradient[11]
+        ));
+    }
+
     function uint2str(uint256 _i) internal pure returns (string memory str) {
         if (_i == 0) {
             return "0";
@@ -176,15 +218,6 @@ contract CryptoGradients is
         override(ERC721, ERC721URIStorage)
     {
         super._burn(tokenId);
-    }
-
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
-        return super.tokenURI(tokenId);
     }
 
     function supportsInterface(bytes4 interfaceId)

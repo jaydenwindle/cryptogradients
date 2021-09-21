@@ -23,9 +23,7 @@ async function main() {
   const CryptoGradients = await hre.ethers.getContractFactory(
     "CryptoGradients"
   );
-  const cg = await CryptoGradients.deploy(
-    "https://testnet-cryptogradients.vercel.app/api/meta/"
-  );
+  const cg = await CryptoGradients.deploy();
 
   await cg.deployed();
 

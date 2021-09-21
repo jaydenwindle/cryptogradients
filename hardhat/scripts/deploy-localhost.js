@@ -17,7 +17,7 @@ async function main() {
   const CryptoGradients = await hre.ethers.getContractFactory(
     "CryptoGradients"
   );
-  const cg = await CryptoGradients.deploy("http://localhost:3000/api/meta/");
+  const cg = await CryptoGradients.deploy();
 
   await cg.deployed();
 
